@@ -13,3 +13,5 @@ del tmp.txt
 
 git tag %var%
 git push origin --tags
+
+pause
