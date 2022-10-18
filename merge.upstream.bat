@@ -8,7 +8,7 @@ git push
 sed -n '/version/p' package.json > tmp.txt
 sed -i 's/[version,",: ]*//g' tmp.txt
 for /f "delims=" %%i in (tmp.txt) do set var=%%i
-echo æœ€æ–°ç‰ˆæœ¬å·:%var%
+echo ×îĞÂ°æ±¾ºÅ:%var%
 del tmp.txt
 
 git tag %var%
