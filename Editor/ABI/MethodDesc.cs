@@ -7,10 +7,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace HybridCLR.Editor.MethodBridge
+namespace HybridCLR.Editor.ABI
 {
-    public class MethodBridgeSig : IEquatable<MethodBridgeSig>
+    public class MethodDesc : IEquatable<MethodDesc>
     {
+        public string Sig { get; private set; }
+
         public MethodDef MethodDef { get; set; }
 
         public ReturnInfo ReturnInfo { get; set; }
@@ -23,6 +25,7 @@ namespace HybridCLR.Editor.MethodBridge
             {
                 ParamInfos[i].Index = i;
             }
+            Sig = CreateCallSigName();
         }
 
         public void TransfromSigTypes(Func<TypeInfo, bool, TypeInfo> transformer)
@@ -58,46 +61,17 @@ namespace HybridCLR.Editor.MethodBridge
 
         public override bool Equals(object obj)
         {
-            return Equals((MethodBridgeSig)obj);
+            return Equals((MethodDesc)obj);
         }
 
-        public bool Equals(MethodBridgeSig other)
+        public bool Equals(MethodDesc other)
         {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (!ReturnInfo.Type.Equals(other.ReturnInfo.Type))
-            {
-                return false;
-            }
-            if (ParamInfos.Count != other.ParamInfos.Count)
-            {
-                return false;
-            }
-            for(int i = 0; i < ParamInfos.Count; i++)
-            {
-                if (!ParamInfos[i].Type.Equals(other.ParamInfos[i].Type))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return Sig == other.Sig;
         }
 
         public override int GetHashCode()
         {
-            int hash = 17;
-
-            hash = hash * 23  + ReturnInfo.Type.GetHashCode();
-
-            foreach(var p in ParamInfos)
-            {
-                hash = hash * 23 + p.Type.GetHashCode();
-            }
-
-            return hash;
+            return Sig.GetHashCode();
         }
     }
 }
