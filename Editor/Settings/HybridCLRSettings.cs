@@ -11,8 +11,11 @@ namespace HybridCLR.Editor
         [Header("使用全局安装的il2cpp")]
         public bool useGlobalIl2cpp;
 
-        [Header("从gitee clone插件代码")]
-        public bool cloneFromGitee = true; // false 则从github上拉取
+        [Header("hybridclr 仓库 URL")]
+        public string hybridclrRepoURL = "https://gitee.com/focus-creative-games/hybridclr";
+
+        [Header("il2cpp_plus 仓库 URL")]
+        public string il2cppPlusRepoURL = "https://gitee.com/focus-creative-games/il2cpp_plus";
 
         [Header("热更新Assembly Definitions")]
         public AssemblyDefinitionAsset[] hotUpdateAssemblyDefinitions;
@@ -26,17 +29,14 @@ namespace HybridCLR.Editor
         [Header("热更新dll编译输出根目录")]
         public string hotUpdateDllCompileOutputRootDir = "HybridCLRData/HotUpdateDlls";
 
+        [Header("外部热更新dll搜索路径")]
+        public string[] externalHotUpdateAssembliyDirs;
+
         [Header("裁减后AOT dll输出根目录")]
         public string strippedAOTDllOutputRootDir = "HybridCLRData/AssembliesPostIl2CppStrip";
 
         [Header("补充元数据AOT dlls")]
         public string[] patchAOTAssemblies;
-
-        [Header("差分混合热更新 dlls")]
-        public string[] differentialHybridAssemblies;
-
-        [Header("差分混合热更新配置数据输出目录")]
-        public string differentialHybridOptionOutputDir = "Assets/StreamingAssets";
 
         [Header("生成link.xml时扫描asset中引用的类型")]
         public bool collectAssetReferenceTypes;
@@ -49,9 +49,6 @@ namespace HybridCLR.Editor
 
         [Header("AOT泛型实例化搜索迭代次数")]
         public int maxGenericReferenceIteration = 10;
-
-        //[Header("预留MonoPInvokeCallbackAttribute函数个数")]
-        //public int ReversePInvokeWrapperCount = 10;
 
         [Header("MethodBridge泛型搜索迭代次数")]
         public int maxMethodBridgeGenericIteration = 10;
